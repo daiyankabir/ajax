@@ -1,0 +1,50 @@
+<html>
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+</style>
+<body>
+
+
+
+<form action=""> 
+  <select name="district" onchange="showDistrict(this.value)">
+    <option value="">Select a Division:</option>
+    <option value="Dhaka">Dhaka</option>
+    <option value="Chittagong">Chittagong</option>
+    <option value="Khulna">Khulna</option>
+	<option value="Barishal">Barishal</option>
+    <option value="Sylhet">Sylhet</option>
+    <option value="Rajshahi">Rajshahi</option>
+	<option value="Rangpur">Rangpur</option>
+    <option value="Mymensingh">Mymensingh</option>
+    
+  </select>
+</form>
+<br>
+<div id="txtHint">District under this division will be listed here...</div>
+
+<script>
+function showDistrict(str) {
+  var xhttp;  
+  if (str == "") {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  }
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("txtHint").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "district.php?q="+str, true);
+  xhttp.send();
+}
+</script>
+</body>
+</html>
